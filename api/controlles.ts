@@ -1,6 +1,8 @@
 
 const db = require("../../db/db.json")
 import {QuestionCard} from './models'
+import {FinalAnswerCard} from './models'
+import {Card} from './models'
 
 import express from 'express'
 // let CardData = db.data;
@@ -69,7 +71,7 @@ export default  {
         newArr = CardData.filter((item)=>Boolean(item.ahmashSelected) === true);
         res.json(newArr);
     },
-    getAnswerArray:(req,res)=>{
+    getAnswerArray:(req:express.Request,res:express.Response)=>{
         let Answer = [];
         CardData.map((item)=>{
             if((item  as QuestionCard).nextCards === undefined){
@@ -80,5 +82,11 @@ export default  {
     },
     getDataArray:(req:express.Request,res:express.Response)=>{
         res.json(CardData)
+    },
+    updateCard:(req:express.Request,res:express.Response)=>{
+        const idcardQuestion:number = req.body.idcardQuestion;
+        const updateQuestion:string=req.body.updateQuestion;
+        const cardQuestion :(QuestionCard|FinalAnswerCard )[]=  (CardData.filter(card => card.id===idcardQuestion) )
+        cardQuestion[0].cardTitle=updateQuestion;
     }
 };

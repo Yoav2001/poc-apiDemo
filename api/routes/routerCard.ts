@@ -13,6 +13,8 @@ router.get('/InchargeSelected',controlles.getInchargeSelected);//
 router.get('/dataarray',controlles.getDataArray)
 router.get('/Answers',controlles.getAnswerArray)
 
+router.patch('/updateCard',controlles.updateCard)
+
 
 
 module.exports = router;
