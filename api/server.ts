@@ -1,7 +1,13 @@
-const express = require('express');
+import express from 'express'
 const app = express();
-const router = require('./routes/questions');
-const cors = require("cors");
+import cors from 'cors'
+import router from './routes/routerCard'
+import bodyParser from 'body-parser'
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(
     cors({
@@ -9,7 +15,7 @@ app.use(
     })
 );
 
-app.use((req,res,next)=>{
+app.use((req, res, next)=>{
     res.header("Access-Control-Origin", "*");
     res.header("Access-Control-Headers", "origin, X-Requested-Width, Content-Type, Accept, Authorization");
     if (req.method === "OPTIONS") {
