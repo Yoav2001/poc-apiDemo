@@ -1,32 +1,27 @@
 
-// const db = require("../../db/db.json")
 import {FinalAnswerCard} from './models/finalAnswerModel'
 import {QuestionCard} from './models/questionCardModel'
 import {Card} from './models/cardModel'
-
 import express from 'express'
-// let CardData = db.data;
-import CardData from './data'
+import db from './dataPoc.json'
 
-const addNexts = ()=>{
+const cardData = db.data as (QuestionCard | FinalAnswerCard)[];
 
+// const cardData:(QuestionCard |FinalAnswerCard)[]=allCards.filter(c=>c.type="QuestionCard").concat(allCards.filter(c=>c.type="FinalAnswerCard"))
+const addNexts = ( cardData:(QuestionCard|FinalAnswerCard)[])=>{
 
-    (CardData[0] as QuestionCard).nextCards = ([CardData[1],CardData[5]]);
-    (CardData[1]  as QuestionCard) .nextCards = ([CardData[6],CardData[10],CardData[10],CardData[2]]);
-    (CardData[2]  as QuestionCard) .nextCards = ([CardData[3],CardData[4]]);
-    (CardData[3]  as QuestionCard) .nextCards= ([CardData[4],CardData[11]]);
-    (CardData[4]  as QuestionCard) .nextCards = ([CardData[7],CardData[11]]);
-    (CardData[7]  as QuestionCard) .nextCards= ([CardData[8],CardData[9]])
-
+    (cardData[0] as QuestionCard).nextCards = ([cardData[1],cardData[5]]);
+    (cardData[1]  as QuestionCard) .nextCards = ([cardData[6],cardData[10],cardData[10],cardData[2]]);
+    (cardData[2]  as QuestionCard) .nextCards = ([cardData[3],cardData[4]]);
+    (cardData[3]  as QuestionCard) .nextCards= ([cardData[4],cardData[11]]);
+    (cardData[4]  as QuestionCard) .nextCards = ([cardData[7],cardData[11]]);
+    (cardData[7]  as QuestionCard) .nextCards= ([cardData[8],cardData[9]])
 
     //cehckNextPoplarFunction
     // (CardData[0] as QuestionCard).nextCards = ([CardData[1],CardData[6],CardData[4]]);
     // (CardData[1] as QuestionCard).nextCards = ([CardData[9],CardData[10]]);
 }
-
-
-//arr is where you put the most Clicked
-//card is The the one
+addNexts(cardData);
 
 const getButtomChilds=(card:QuestionCard)=>{
     const arrFinalAnswers :FinalAnswerCard[]=new Array();
@@ -51,44 +46,18 @@ const getButtomChildsRekorsiv=(c:QuestionCard|FinalAnswerCard,arr:FinalAnswerCar
 }
 
 
-// const getAllChildOfCard =  (result: FinalAnswerCard[], card:QuestionCard | FinalAnswerCard)=>{
-//     if(card.type === 'FinalAnswerCard'){
-//         //sorting
-//         return result;
-//     }
-//     else{
-//         if(card.nextCards !== undefined){
-//             if((card as QuestionCard) !== undefined){
-//                 for (let index = 0; index < (card as QuestionCard).nextCards!.length; index++) {
-//                     if(result.indexOf((card as QuestionCard).nextCards[index]) === -1){
-//                         result.push(card.nextCards[index]);
-//                     }
-                    
-//                 }
-//                 for (let index = 0; index < card.nextCards.length; index++) {
-//                     GetMostClicked(result,card.nextCards[index]);      
-//                 }
-//             }
-
-//         }
-
-//     }
-// }
-
-addNexts();
-
 export default  {
     AllData : (req:express.Request,res:express.Response)=>{
-        res.json(CardData[0]);
+        res.json(cardData[0]);
     },
     getTheCard: (req:express.Request,res:express.Response)=>{
         const id = req.params.CardId;
-        const theCard = CardData.find((item)=>item.id === parseInt(id))
+        const theCard = cardData.find((item)=>item.id === parseInt(id))
         res.json(theCard)
     },
     getallFinalAnswersOfCardQuestion :(req:express.Request,res:express.Response)=>{
         const id = req.params.CardId;
-        const cardQuestion = CardData.find((item)=>item.id === parseInt(id))
+        const cardQuestion = cardData.find((item)=>item.id === parseInt(id))
 
     },
     updateCard:(req:express.Request,res:express.Response)=>{
@@ -97,7 +66,7 @@ export default  {
       
         const updateTitle:string=req.body.updateTitle;
         const idcardTitle:number =<number> req.body.idCardTitle;
-        const cardQuestion :(QuestionCard|FinalAnswerCard)[]=  (CardData.filter(card => card.id===idcardTitle) )
+        const cardQuestion :(QuestionCard|FinalAnswerCard)[]=  (cardData.filter(card => card.id===idcardTitle) )
         cardQuestion[0].cardTitle=updateTitle;
         res.json( cardQuestion[0])
 
@@ -105,7 +74,7 @@ export default  {
     },
     getMostPopularFinalAnswer:(req:express.Request,res:express.Response)=>{
         const id = req.params.CardId;
-        const theCard = CardData.find((item)=>item.id === parseInt(id))
+        const theCard = cardData.find((item)=>item.id === parseInt(id))
         // console.log(theCard);
         
         // if(theCard?.nextCards===null)
@@ -117,9 +86,16 @@ export default  {
         res.json(mostCommonFinalAnswers.slice(0,4))
 
 
+    },
+    getInchargeSelected:(req:express.Request,res:express.Response)=>{
+       let newArr;
+         newArr = cardData.filter((item)=>Boolean(item.ahmashSelected));
+        res.json(newArr);
     }
-    
 }
+
+
+
 //  , getMostClickedInTheTree:(req:express.Request,res:express.Response)=>{
 //         let MostClicked:FinalAnswerCard[] =[];
 
@@ -166,3 +142,27 @@ export default  {
     // }
 // };
 
+
+// const getAllChildOfCard =  (result: FinalAnswerCard[], card:QuestionCard | FinalAnswerCard)=>{
+//     if(card.type === 'FinalAnswerCard'){
+//         //sorting
+//         return result;
+//     }
+//     else{
+//         if(card.nextCards !== undefined){
+//             if((card as QuestionCard) !== undefined){
+//                 for (let index = 0; index < (card as QuestionCard).nextCards!.length; index++) {
+//                     if(result.indexOf((card as QuestionCard).nextCards[index]) === -1){
+//                         result.push(card.nextCards[index]);
+//                     }
+                    
+//                 }
+//                 for (let index = 0; index < card.nextCards.length; index++) {
+//                     GetMostClicked(result,card.nextCards[index]);      
+//                 }
+//             }
+
+//         }
+
+//     }
+// }
