@@ -11,4 +11,5 @@ export type FinalAnswerCard  =  Card & {
     crmSubQuestion:string,
     nextCards?:null
 }
+
 export type getFianlCardByCardId = (FinalCardId:FinalAnswerCard["id"]) => Promise<FinalAnswerCard | undefined>;
