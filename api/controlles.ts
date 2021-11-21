@@ -23,33 +23,35 @@ const addNexts = ( cardData:(QuestionCard|FinalAnswerCard)[])=>{
 }
 addNexts(cardData);
 
-const getButtomChilds=(card:QuestionCard)=>{
-    const arrFinalAnswers :FinalAnswerCard[]=new Array();
+// const getButtomChilds=(card:QuestionCard)=>{
+//     const arrFinalAnswers :FinalAnswerCard[]=new Array();
 
-    getButtomChildsRekorsiv(card,arrFinalAnswers)
-    return arrFinalAnswers;
-}
-const getButtomChildsRekorsiv=(c:QuestionCard|FinalAnswerCard,arr:FinalAnswerCard[])=>{
+//     getButtomChildsRekorsiv(card,arrFinalAnswers)
+//     return arrFinalAnswers;
+// }
+// const getButtomChildsRekorsiv=(c:QuestionCard|FinalAnswerCard,arr:FinalAnswerCard[])=>{
  
-    if(c.nextCards===null||c.type==="FinalAnswerCard"){
-        arr.push(c) 
-        return
-    }
-     c.nextCards?.map(c => getButtomChildsRekorsiv(c,arr))
+//     if(c.nextCards===null||c.type==="FinalAnswerCard"){
+//         arr.push(c) 
+//         return
+//     }
+//      c.nextCards?.map(c => getButtomChildsRekorsiv(c,arr))
 
-}
+// }
 
 
 export default  {
     getTheFirstCard : (req:express.Request,res:express.Response)=>{
         // res.json(cardData[0])
+        console.log("dsfds");
+        
         res.json(cardLogic.getFirstCard());
     },
-    getCardByCardId: (req:express.Request,res:express.Response)=>{
-        const id = req.params.CardId;
-        // const theCard = cardData.find((item)=>item.id === parseInt(id))
-        res.json(cardLogic.getCardByCardId(id))
-    },
+    // getCardByCardId: (req:express.Request,res:express.Response)=>{
+    //     const id:number = req.params.CardId;
+    //     // const theCard = cardData.find((item)=>item.id === parseInt(id))
+    //     res.json(cardLogic.getCardByCardId(id))
+    // },
     getallFinalAnswersOfCardQuestion :(req:express.Request,res:express.Response)=>{
         // const id = req.params.CardId;
         // const cardQuestion = cardData.find((item)=>item.id === parseInt(id))
@@ -63,51 +65,52 @@ export default  {
         // res.json( cardQuestion[0])
         const { idcardTitle, updateTitle,numberClicked, ahmashSelected } : {idcardTitle : number, updateTitle : string, numberClicked : number,ahmashSelected:boolean} = req.body;
         const c:Card={id:idcardTitle,cardTitle:updateTitle,clicked:numberClicked,ahmashSelected:ahmashSelected}
-        const newCard:QuestionCard|FinalAnswerCard=cardLogic.updateCard(c)
+        const newCard:QuestionCard|FinalAnswerCard|undefined=cardLogic.updateCard(c)
         res.json(newCard);
 
     },
-    getMostPopularFinalAnswer:(req:express.Request,res:express.Response)=>{
-        const id = req.params.CardId;
+    // getMostPopularFinalAnswer:(req:express.Request,res:express.Response)=>{
+    //     const id = req.params.CardId;
 
-        // const theCard = cardData.find((item)=>item.id === parseInt(id))
-        // const mostCommonFinalAnswers:FinalAnswerCard[]=getButtomChilds(theCard as QuestionCard)
-        // mostCommonFinalAnswers.sort(function(a, b){return b.clicked-a.clicked});
-        // res.json(mostCommonFinalAnswers.slice(0,4))
+    //     // const theCard = cardData.find((item)=>item.id === parseInt(id))
+    //     // const mostCommonFinalAnswers:FinalAnswerCard[]=getButtomChilds(theCard as QuestionCard)
+    //     // mostCommonFinalAnswers.sort(function(a, b){return b.clicked-a.clicked});
+    //     // res.json(mostCommonFinalAnswers.slice(0,4))
 
-        const arrPopularFinalAnswer=cardLogic.getPopularFinalAnswers(id)
-        res.json(arrPopularFinalAnswer)
+    //     const arrPopularFinalAnswer=cardLogic.getPopularFinalAnswers(id)
+    //     res.json(arrPopularFinalAnswer)
 
 
-    },
+    // },
     getInchargeSelected:(req:express.Request,res:express.Response)=>{
     //    let newArr;
     //     newArr = cardData.filter((item)=>Boolean(item.ahmashSelected));
     //     res.json(newArr);
     const cardInchargeSelected= cardLogic.getInchargeSelectedCards();
     res.json(cardInchargeSelected);
-    },
-    addNewCard:(req:express.Request,res:express.Response)=>{
-        const { typeCard, cardTitle, ahmashSelected } : {typeCard : string, cardTitle : string, ahmashSelected : boolean} = req.body;
-        const id :number =cardData[cardData.length].id++;
-        const prevCard:QuestionCard|FinalAnswerCard=cardData[req.body.prevCardId]
-        const c:Card={id:id,prevCard:prevCard,cardTitle:cardTitle,clicked:0,ahmashSelected:ahmashSelected};
+    }
+    // ,
+    // addNewCard:(req:express.Request,res:express.Response)=>{
+    //     const { typeCard, cardTitle, ahmashSelected } : {typeCard : string, cardTitle : string, ahmashSelected : boolean} = req.body;
+    //     const id :number =cardData[cardData.length].id++;
+    //     const prevCard:QuestionCard|FinalAnswerCard=cardData[req.body.prevCardId]
+    //     const c:Card={id:id,prevCard:prevCard,cardTitle:cardTitle,clicked:0,ahmashSelected:ahmashSelected};
 
-        if(typeCard==="QuestionCard"){
-            const answers:string[]=req.body.answersQuestionCard;
-            const q:QuestionCard={...c,type:typeCard,answers:answers }
-            cardData.addNewQuestionCardAndConnect(q);
-            res.json(q)
-        }
-        else if(typeCard==="FinalAnswerCard"){
-        const { crmField, crmSubField, crmQuestion,crmSubQuestion } : {crmField : string, crmSubField : string, crmQuestion : string,crmSubQuestion:string} = req.body;
-            const fa:FinalAnswerCard={...c,type:typeCard,crmField:crmField,crmSubField:crmSubField, crmQuestion :crmQuestion, crmSubQuestion:crmSubQuestion}
-            cardData.addNewFaCardAndConnect(fa,cardData);
-            res.json(fa)
-        }
-        res.json("there was a problem with inseret data")
+    //     if(typeCard==="QuestionCard"){
+    //         const answers:string[]=req.body.answersQuestionCard;
+    //         const q:QuestionCard={...c,type:typeCard,answers:answers }
+    //         cardData.addNewQuestionCardAndConnect(q);
+    //         res.json(q)
+    //     }
+    //     else if(typeCard==="FinalAnswerCard"){
+    //     const { crmField, crmSubField, crmQuestion,crmSubQuestion } : {crmField : string, crmSubField : string, crmQuestion : string,crmSubQuestion:string} = req.body;
+    //         const fa:FinalAnswerCard={...c,type:typeCard,crmField:crmField,crmSubField:crmSubField, crmQuestion :crmQuestion, crmSubQuestion:crmSubQuestion}
+    //         cardData.addNewFaCardAndConnect(fa,cardData);
+    //         res.json(fa)
+    //     }
+    //     res.json("there was a problem with inseret data")
             
-     }
+    //  }
 }
 
 

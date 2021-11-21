@@ -4,12 +4,12 @@ import controlles from '../controlles'
 
 
 const router = express.Router();
-router.post('/card',controlles.addNewCard)
+// router.post('/card',controlles.addNewCard)
 router.get('/card/firstCard',controlles.getTheFirstCard);//first card
-router.get('/card/:CardId',controlles.getCardByCardId );//FA /QA
+// router.get('/card/:CardId',controlles.getCardByCardId );//FA /QA
 //get a card id and return all final answers 
 router.get('/finalAnswerOfCard/:CardId',controlles.getallFinalAnswersOfCardQuestion);
-router.get('/MostClicked/:CardId',controlles.getMostPopularFinalAnswer);
+// router.get('/MostClicked/:CardId',controlles.getMostPopularFinalAnswer);
 router.get('/InchargeSelected',controlles.getInchargeSelected);//
 router.patch('/updateCard',controlles.updateCard)
 

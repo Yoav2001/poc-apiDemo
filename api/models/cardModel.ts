@@ -12,7 +12,7 @@ export type Card ={
 
 export type FinalAnswerCard  =  Card & { 
     type: 'FinalAnswerCard'
-    // idFinalAnswerCard:number,
+    // idFinalAnswerCards:number,
     crmField:string,
     crmSubField:string,
     crmQuestion :string,
@@ -27,9 +27,9 @@ export type QuestionCard =  Card &{
  }
 
  export type getTheFirstCard = () =>QuestionCard|FinalAnswerCard;
- export type getCardByCardId = (cardId:Card["id"]) => QuestionCard|FinalAnswerCard;
+ export type getCardByCardId = (cardId:Card["id"]) => QuestionCard|FinalAnswerCard|undefined;
  export type addCard = (c: QuestionCard|FinalAnswerCard) => QuestionCard|FinalAnswerCard;
- export type udpateCard = (c: Card) =>  QuestionCard|FinalAnswerCard
+ export type updateCard = (c: Card) =>  QuestionCard|FinalAnswerCard|undefined;
  export type getMostPopularFinalAnswer = (cardId:Card["id"]) =>(FinalAnswerCard|undefined)[];
  export type getAllInchargeSelectedCards = () =>(QuestionCard|FinalAnswerCard)[];
 

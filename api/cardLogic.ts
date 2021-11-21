@@ -9,16 +9,16 @@ const cardData = db.data as (QuestionCard | FinalAnswerCard)[];
 const getButtomChilds=(card:QuestionCard)=>{
     const arrFinalAnswers :FinalAnswerCard[]=new Array();
 
-    getButtomChildsRekorsiv(card,arrFinalAnswers)
-    return arrFinalAnswers;
+    // getButtomChildsRekorsiv(card,arrFinalAnswers)
+    // return arrFinalAnswers;
 }
 const getButtomChildsRekorsiv=(c:QuestionCard|FinalAnswerCard,arr:FinalAnswerCard[])=>{
  
-    if(c.nextCards===null||c.type==="FinalAnswerCard"){
-        arr.push(c) 
-        return
-    }
-     c.nextCards?.map(c => getButtomChildsRekorsiv(c,arr))
+    // if(c.nextCards===null&&c.nextCards===undefined||c.type==="FinalAnswerCard"){
+    //     arr.push(c) 
+    //     return
+    // }
+    //  c.nextCards?.map(c => getButtomChildsRekorsiv(c,arr))
 
 }
 
@@ -36,23 +36,28 @@ const getCardByCardId:CardModel.getCardByCardId=(id:CardModel.Card["id"])=>{
 }
 
 
-const udpateCard:CardModel.udpateCard=(newCard:CardModel.Card)=>{
+const updateCard:CardModel.updateCard=(newCard:CardModel.Card)=>{
     const c:QuestionCard|FinalAnswerCard|undefined=getCardByCardId(newCard.id)
+    if(c===undefined){
+        return undefined
+    }
+
     c.cardTitle=newCard.cardTitle;
     c.ahmashSelected=newCard.ahmashSelected
     c.clicked=newCard.clicked;
+   
     return c;
     
 
 }  
-const getPopularFinalAnswers:CardModel.getMostPopularFinalAnswer=(id:CardModel.Card["id"])=>{
+// const getPopularFinalAnswers:CardModel.getMostPopularFinalAnswer=(id:CardModel.Card["id"])=>{
 
-     const theCard = getCardByCardId(id)
-     const mostCommonFinalAnswers:FinalAnswerCard[]=getButtomChilds(theCard as QuestionCard)
-     mostCommonFinalAnswers.sort(function(a, b){return b.clicked-a.clicked});
-    return  mostCommonFinalAnswers.slice(0,4)
+//      const theCard = getCardByCardId(id)
+//      const mostCommonFinalAnswers:FinalAnswerCard[]=getButtomChilds(theCard as QuestionCard)
+//      mostCommonFinalAnswers.sort(function(a, b){return b.clicked-a.clicked});
+//     return  mostCommonFinalAnswers.slice(0,4)
 
-}
+// }
 const getInchargeSelectedCards:CardModel.getAllInchargeSelectedCards=()=>{
     const arrInChargeSelected:(QuestionCard|FinalAnswerCard)[] =cardData.filter((item)=>Boolean(item.ahmashSelected));
     return arrInChargeSelected;
@@ -67,4 +72,4 @@ const addNewFaCardAndConnect=()=>{
 
 
 }
-export default {getFirstCard,getCardByCardId,udpateCard,getPopularFinalAnswers,getInchargeSelectedCards}
+export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards}

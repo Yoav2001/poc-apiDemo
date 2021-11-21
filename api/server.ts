@@ -39,5 +39,6 @@ app.use("/api",router);
 //         "message" : error.message
 //     }});
 // });
-
-app.listen(8000);
+const port :number =8000;
+app.listen(port);
+console.log(`app listen on port ${port}`);
