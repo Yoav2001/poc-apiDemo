@@ -1,4 +1,5 @@
-
+import {FinalAnswerCard} from './finalAnswerModel'
+import {QuestionCard} from './questionCardModel'
 //table cardTree
 export type Card ={
     id: number;
@@ -10,27 +11,14 @@ export type Card ={
     // type: 'QuestionCard' | 'FinalAnswerCard'
 }
 
-export type FinalAnswerCard  =  Card & { 
-    type: 'FinalAnswerCard'
-    // idFinalAnswerCards:number,
-    crmField:string,
-    crmSubField:string,
-    crmQuestion :string,
-    crmSubQuestion:string,
-    nextCards?:null
-}
-export type QuestionCard =  Card &{
-    type: 'QuestionCard' 
-    answers: string[];//change from answer[] there was type of answer
-    indexSelectedAnswer?: number;
-    nextCards?: (QuestionCard | FinalAnswerCard)[];
- }
+
 
  export type getTheFirstCard = () =>QuestionCard|FinalAnswerCard;
  export type getCardByCardId = (cardId:Card["id"]) => QuestionCard|FinalAnswerCard|undefined;
  export type addCard = (c: QuestionCard|FinalAnswerCard) => QuestionCard|FinalAnswerCard;
  export type updateCard = (c: Card) =>  QuestionCard|FinalAnswerCard|undefined;
- export type getMostPopularFinalAnswer = (cardId:Card["id"]) =>(FinalAnswerCard|undefined)[];
+ export type getallFinalAnswerofCardQuestion = (cardQuestionid:Card["id"]) =>(FinalAnswerCard|undefined)[];
+ export type getMostPopularFinalAnswerOfCardQuestion = (cardQuestionid:Card["id"]) =>(FinalAnswerCard|undefined)[];
  export type getAllInchargeSelectedCards = () =>(QuestionCard|FinalAnswerCard)[];
 
  

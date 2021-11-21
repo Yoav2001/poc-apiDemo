@@ -23,21 +23,7 @@ const addNexts = ( cardData:(QuestionCard|FinalAnswerCard)[])=>{
 }
 addNexts(cardData);
 
-// const getButtomChilds=(card:QuestionCard)=>{
-//     const arrFinalAnswers :FinalAnswerCard[]=new Array();
 
-//     getButtomChildsRekorsiv(card,arrFinalAnswers)
-//     return arrFinalAnswers;
-// }
-// const getButtomChildsRekorsiv=(c:QuestionCard|FinalAnswerCard,arr:FinalAnswerCard[])=>{
- 
-//     if(c.nextCards===null||c.type==="FinalAnswerCard"){
-//         arr.push(c) 
-//         return
-//     }
-//      c.nextCards?.map(c => getButtomChildsRekorsiv(c,arr))
-
-// }
 
 
 export default  {
@@ -47,14 +33,15 @@ export default  {
         
         res.json(cardLogic.getFirstCard());
     },
-    // getCardByCardId: (req:express.Request,res:express.Response)=>{
-    //     const id:number = req.params.CardId;
-    //     // const theCard = cardData.find((item)=>item.id === parseInt(id))
-    //     res.json(cardLogic.getCardByCardId(id))
-    // },
+    getCardByCardId: (req:express.Request,res:express.Response)=>{
+        const id:string = req.params.cardId;
+        // const theCard = cardData.find((item)=>item.id === parseInt(id))
+        res.json(cardLogic.getCardByCardId(parseInt(id)))
+    },
     getallFinalAnswersOfCardQuestion :(req:express.Request,res:express.Response)=>{
-        // const id = req.params.CardId;
-        // const cardQuestion = cardData.find((item)=>item.id === parseInt(id))
+        const id = req.params.cardId;
+        const arrfinalAnswers=cardLogic.getAllFinalAnswersOfCard(parseInt(id))
+        res.json(arrfinalAnswers)
 
     },
     updateCard:(req:express.Request,res:express.Response)=>{
@@ -69,19 +56,19 @@ export default  {
         res.json(newCard);
 
     },
-    // getMostPopularFinalAnswer:(req:express.Request,res:express.Response)=>{
-    //     const id = req.params.CardId;
+    getMostPopularFinalAnswer:(req:express.Request,res:express.Response)=>{
+        const id = req.params.cardId;
 
-    //     // const theCard = cardData.find((item)=>item.id === parseInt(id))
-    //     // const mostCommonFinalAnswers:FinalAnswerCard[]=getButtomChilds(theCard as QuestionCard)
-    //     // mostCommonFinalAnswers.sort(function(a, b){return b.clicked-a.clicked});
-    //     // res.json(mostCommonFinalAnswers.slice(0,4))
+        // const theCard = cardData.find((item)=>item.id === parseInt(id))
+        // const mostCommonFinalAnswers:FinalAnswerCard[]=getButtomChilds(theCard as QuestionCard)
+        // mostCommonFinalAnswers.sort(function(a, b){return b.clicked-a.clicked});
+        // res.json(mostCommonFinalAnswers.slice(0,4))
 
-    //     const arrPopularFinalAnswer=cardLogic.getPopularFinalAnswers(id)
-    //     res.json(arrPopularFinalAnswer)
+        const arrPopularFinalAnswer=cardLogic.getPopularFinalAnswers(parseInt(id))
+        res.json(arrPopularFinalAnswer)
 
 
-    // },
+    },
     getInchargeSelected:(req:express.Request,res:express.Response)=>{
     //    let newArr;
     //     newArr = cardData.filter((item)=>Boolean(item.ahmashSelected));
@@ -115,73 +102,3 @@ export default  {
 
 
 
-//  , getMostClickedInTheTree:(req:express.Request,res:express.Response)=>{
-//         let MostClicked:FinalAnswerCard[] =[];
-
-//         const id = req.params.CardId;
-//         CardData.map((item)=>{
-//             if(item.id === Number(id)){
-//                 GetMostClicked(MostClicked,item);
-//                 MostClicked.sort((a,b)=>Number(b.clicked) - Number(a.clicked));
-//                 let Answer = [];
-//                 MostClicked.map((item )=>{
-//                     if(item.nextCards === undefined){
-//                         Answer.push(item)
-//                     }
-//                 })
-//                 Answer.splice(4,MostClicked.length)
-//                 res.json(Answer);
-//             }
-//         })
-//     }
-
-    // ,
-//     // getInchargeSelected:(req:express.Request,res:express.Response)=>{
-//     //     let newArr;
-//     //     newArr = CardData.filter((item)=>Boolean(item.ahmashSelected) === true);
-//     //     res.json(newArr);
-//     // },
-//     // getAnswerArray:(req:express.Request,res:express.Response)=>{
-//     //     let Answer = [];
-//     //     CardData.map((item)=>{
-//     //         if((item  as QuestionCard).nextCards === undefined){
-//     //             Answer.push(item)
-//     //         }
-//     //     })
-//     //     res.json(Answer);
-//     // },
-//     // getDataArray:(req:express.Request,res:express.Response)=>{
-//     //     res.json(CardData)
-    // },
-    // updateCard:(req:express.Request,res:express.Response)=>{
-    //     const idcardQuestion:number = req.body.idcardQuestion;
-    //     const updateQuestion:string=req.body.updateQuestion;
-    //     const cardQuestion :(QuestionCard|FinalAnswerCard )[]=  (CardData.filter(card => card.id===idcardQuestion) )
-    //     cardQuestion[0].cardTitle=updateQuestion;
-    // }
-// };
-
-
-// const getAllChildOfCard =  (result: FinalAnswerCard[], card:QuestionCard | FinalAnswerCard)=>{
-//     if(card.type === 'FinalAnswerCard'){
-//         //sorting
-//         return result;
-//     }
-//     else{
-//         if(card.nextCards !== undefined){
-//             if((card as QuestionCard) !== undefined){
-//                 for (let index = 0; index < (card as QuestionCard).nextCards!.length; index++) {
-//                     if(result.indexOf((card as QuestionCard).nextCards[index]) === -1){
-//                         result.push(card.nextCards[index]);
-//                     }
-                    
-//                 }
-//                 for (let index = 0; index < card.nextCards.length; index++) {
-//                     GetMostClicked(result,card.nextCards[index]);      
-//                 }
-//             }
-
-//         }
-
-//     }
-// }

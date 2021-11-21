@@ -1,7 +1,7 @@
 import express from 'express'
 const app = express();
 import cors from 'cors'
-import router from './routes/routerCard'
+import mainRouter from './routes/mainRouter'
 import bodyParser from 'body-parser'
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -25,7 +25,7 @@ app.use((req, res, next)=>{
     next();
 });
 //routes
-app.use("/api",router);
+app.use("/api",mainRouter);
 
 
 // app.use((req,res,next)=>{ 
