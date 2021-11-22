@@ -1,5 +1,7 @@
 import {FinalAnswerCard} from './finalAnswerModel'
 import {QuestionCard} from './questionCardModel'
+//   הנחה חשובה מספר הנקסטים בכרטיס שאלה צריך להיות שווה למספר התשובות 
+
 //table cardTree
 export type Card ={
     id: number;

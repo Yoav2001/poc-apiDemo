@@ -12,7 +12,7 @@
        {"id":9,"type":"FinalAnswerCard","cardTitle":"העבר פניה למדור תו''ם","clicked":45,"ahmashSelected":false,"crmField":"גיוס","crmSubField":"מתגייסים ברשת","crmQuestion":"לא מצליח להתחבר לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר"},
        {"id":10,"type":"FinalAnswerCard","cardTitle":"לעשות הסבה, להנחות להמתין לפחות 24 שעות ולהיכנס עם סיסמא ראשונית(סוג מידע 105)","clicked":600,"ahmashSelected":false,"crmField":"גיוס","crmSubField":"מתגיסים ברשת","crmQuestion":"לא מצליח להתחבר לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר"},
        {"id":11,"type":"FinalAnswerCard","cardTitle":"לבדוק ולעשות הסבה","clicked":4000,"ahmashSelected":false,"crmField":"גיוס","crmSubField":"מתגייסים ברשת ","crmQuestion":"חוסר/פער בנתונים","crmSubQuestion":"חוסר/פער בנתונים"},
-       {"id":12,"type":"FinalAnswerCard","cardTitle":"תודה רבה נגמר","clicked":500,"ahmashSelected":false,"crmField":"גיוס","crmSubField":"מתגייסים ברשת","crmQuestion":"לא מצליח להתחבר לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר"}
+       {"id":12,"type":"FinalAnswerCard","cardTitle":"תודה רבה נגמר","clicked":500,"ahmashSelected":true,"crmField":"גיוס","crmSubField":"מתגייסים ברשת","crmQuestion":"לא מצליח להתחבר לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר"}
         
                  
     ]

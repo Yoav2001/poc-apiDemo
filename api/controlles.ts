@@ -1,7 +1,6 @@
 import {FinalAnswerCard} from './models/finalAnswerModel'
 import {QuestionCard} from './models/questionCardModel'
 import {Card} from './models/cardModel'
-
 import express from 'express'
 import db from './dataPoc.json'
 import cardLogic from './cardLogic'

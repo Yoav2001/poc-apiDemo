@@ -8,11 +8,11 @@ import cardQuestionRouter from './questionCardRouter'
 //api/card/qustionCard/
 const router = express.Router();
 // router.post('/card',controlles.addNewCard)
-router.get('/firstCard',controlles.getTheFirstCard);//first card
-router.get('/:cardId',controlles.getCardByCardId );//FA /QA
+router.get('/firstCard',controlles.getTheFirstCard);
+router.get('/inchargeSelected',controlles.getInchargeSelected);
+router.get('/:cardId',controlles.getCardByCardId );//this req need to be the last req because of paramas
 //get a card id and return all final answers 
 router.get('/mostClicked/:cardId',controlles.getMostPopularFinalAnswer);
-router.get('/inchargeSelected',controlles.getInchargeSelected);//
 router.patch('/updateCard',controlles.updateCard)
 
 
