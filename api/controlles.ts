@@ -69,23 +69,44 @@ export default  {
 
     },
     getInchargeSelected:(req:express.Request,res:express.Response)=>{
-    //    let newArr;
-    //     newArr = cardData.filter((item)=>Boolean(item.ahmashSelected));
-    //     res.json(newArr);
     const cardInchargeSelected= cardLogic.getInchargeSelectedCards();
     res.json(cardInchargeSelected);
+    },
+    getCountInchargeSelected:(req:express.Request,res:express.Response)=>{
+        const cardInchargeSelected= cardLogic.getInchargeSelectedCards();
+        res.json(cardInchargeSelected.length);
     },
     getAllCardQuestion:(req:express.Request,res:express.Response)=>{
         res.json(cardLogic.getAllquestionOrFinalanswers("QuestionCard"));
     },
     getAllFinalAnswers:(req:express.Request,res:express.Response)=>{
-        console.log("SDfdsfsd");
-        
         res.json(cardLogic.getAllquestionOrFinalanswers("FinalAnswerCard"));
     },
- 
-    // ,
+    addNewClickToCard:(req:express.Request,res:express.Response)=>{
+        const {idCurrentCardQuestion,indexNextCardSelected}:{ idCurrentCardQuestion : number , indexNextCardSelected : string}=req.body;
+
+        cardLogic.addNewClickToCard()
+    },
+    addNewFinalAnswerCard:(req:express.Request,res:express.Response)=>{
+        const { cardTitle, ahmashSelected ,crmField, crmSubField, crmQuestion,crmSubQuestion} : { cardTitle : string, ahmashSelected : boolean,crmField : string, crmSubField : string, crmQuestion : string,crmSubQuestion:string} = req.body;
+        const idForNewFaCard :number =cardData[cardData.length].id++;
+        const c:Card={id:idForNewFaCard,cardTitle:cardTitle,clicked:0,ahmashSelected:ahmashSelected};
+        const fa:FinalAnswerCard={...c,type:"FinalAnswerCard",crmField:crmField,crmSubField:crmSubField, crmQuestion :crmQuestion, crmSubQuestion:crmSubQuestion}
+        const {cardQuestionIdRefToFinalAnswer,answerRefToFinalAnswer}:{ cardQuestionIdRefToFinalAnswer : number , answerRefToFinalAnswer : string}=req.body;
+        try{
+             cardLogic.addNewFinalAnswerCardAndConnect(fa,cardQuestionIdRefToFinalAnswer,answerRefToFinalAnswer);
+
+        }
+        catch{
+            res.json("there was a problem with inseret data")
+
+        }
+            
+      }
+
+    
     // addNewCard:(req:express.Request,res:express.Response)=>{
+       
     //     const { typeCard, cardTitle, ahmashSelected } : {typeCard : string, cardTitle : string, ahmashSelected : boolean} = req.body;
     //     const id :number =cardData[cardData.length].id++;
     //     const prevCard:QuestionCard|FinalAnswerCard=cardData[req.body.prevCardId]
@@ -104,9 +125,8 @@ export default  {
     //         res.json(fa)
     //     }
     //     res.json("there was a problem with inseret data")
-            
-    //  }
+        // }
+
+
+
 }
-
-
-

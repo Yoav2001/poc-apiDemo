@@ -91,16 +91,64 @@ const getAllquestionOrFinalanswers:CardModel.getAllCardsByType=(typeCards:qcMode
         return  cardData.filter(c=> c.type===typeCards)
 }
 
+// const addNewClickToCardWayOne:CardModel.addNewClickToCardCountWayOne=(idCard:CardModel.Card["id"],indexNextCardToAdd)=>{
 
+//         const currentCardQuestion:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(idCard)
+//         if( currentCardQuestion?.type==="QuestionCard"){
+//             if(currentCardQuestion.nextCards!==undefined){
+//                 currentCardQuestion.nextCards[indexNextCardToAdd].clicked++
+//             }
+//             else{
+//                 throw new Error("there is no next card to this question to add click");
+
+//             }
+
+
+//            }else{
+                 
+//             throw new Error("Error you need to give id of cardQuestion ");
+
+//            }
+// }
+
+const addNewClickToCard:CardModel.addNewClickToCardCountWayOne=(idCard:CardModel.Card["id"],indexNextCardToAdd)=>{
+
+        const currentCardQuestion:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(idCard)
+        if( currentCardQuestion?.type==="QuestionCard"){
+            if(currentCardQuestion.nextCards!==undefined){
+                currentCardQuestion.nextCards[indexNextCardToAdd].clicked++
+            }
+            else{
+                throw new Error("there is no next card to this question to add click");
+
+            }
+
+
+           }else{
+                 
+            throw new Error("Error you need to give id of cardQuestion ");
+
+           }
+}
+
+const addNewFinalAnswerCardAndConnect:CardModel.addNewFinalAnswerAndAnswerToCardQuestion=(idQuestionCard:CardModel.Card["id"],fa:faModel.FinalAnswerCard,cardQuestionIdRefToFinalAnswer:qcModel.QuestionCard["id"],answerRefToFinalAnswer:string)=>{
+
+    const cardQuestion:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(cardQuestionIdRefToFinalAnswer)
+    if(cardQuestion?.type==="QuestionCard"){
+         cardQuestion.answers.push(answerRefToFinalAnswer)
+        cardQuestion.nextCards?.push(fa) 
+           
+
+        }else{
+            throw new Error("Error you need to give id of cardQuestion ");
+
+        }
+}
 
 const addNewQuestionCardAndConnect=()=>{
 
 
 
 }
-const addNewFaCardAndConnect=()=>{
 
-
-
-}
-export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers}
+export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers,addNewFinalAnswerCardAndConnect,addNewClickToCard}
