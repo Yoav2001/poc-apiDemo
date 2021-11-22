@@ -13,3 +13,4 @@ export type FinalAnswerCard  =  Card & {
 }
 
 export type getFianlCardByCardId = (FinalCardId:FinalAnswerCard["id"]) => Promise<FinalAnswerCard | undefined>;
+export type getallFinalAnswersCard = () => FinalAnswerCard[] | undefined;

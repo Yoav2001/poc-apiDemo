@@ -75,7 +75,16 @@ export default  {
     //     res.json(newArr);
     const cardInchargeSelected= cardLogic.getInchargeSelectedCards();
     res.json(cardInchargeSelected);
-    }
+    },
+    getAllCardQuestion:(req:express.Request,res:express.Response)=>{
+        res.json(cardLogic.getAllquestionOrFinalanswers("QuestionCard"));
+    },
+    getAllFinalAnswers:(req:express.Request,res:express.Response)=>{
+        console.log("SDfdsfsd");
+        
+        res.json(cardLogic.getAllquestionOrFinalanswers("FinalAnswerCard"));
+    },
+ 
     // ,
     // addNewCard:(req:express.Request,res:express.Response)=>{
     //     const { typeCard, cardTitle, ahmashSelected } : {typeCard : string, cardTitle : string, ahmashSelected : boolean} = req.body;

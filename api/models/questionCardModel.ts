@@ -7,8 +7,9 @@ export type QuestionCard =  Card &{
     indexSelectedAnswer?: number;
     nextCards?: (QuestionCard | FinalAnswerCard)[];
  }
- export type getQuestionCardByCardId = (questionCardId:QuestionCard["id"]) => Promise<QuestionCard | undefined>;
- 
+ export type getQuestionCardByCardId = (questionCardId:QuestionCard["id"]) => QuestionCard | undefined;
+ export type getAllQuestionCard = () => QuestionCard[] | undefined;
+
 
  //answer table
 // export type Answer = {
