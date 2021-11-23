@@ -7,6 +7,7 @@ import express from 'express'
 import db from './dataPoc.json'
 const cardData = db.data as (qcModel.QuestionCard | faModel.FinalAnswerCard)[];
 
+const startClickedForNewCard :number=0;
 const getButtomChilds=(card:qcModel.QuestionCard)=>{
     const arrFinalAnswers :faModel.FinalAnswerCard[]=new Array();
 
@@ -111,33 +112,27 @@ const getAllquestionOrFinalanswers:CardModel.getAllCardsByType=(typeCards:qcMode
 //            }
 // }
 
-const addNewClickToCard:CardModel.addNewClickToCardCountWayOne=(idCard:CardModel.Card["id"],indexNextCardToAdd)=>{
+const addNewClickToCard:CardModel.addNewClickToCard=(idCard:CardModel.Card["id"])=>{
 
-        const currentCardQuestion:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(idCard)
-        if( currentCardQuestion?.type==="QuestionCard"){
-            if(currentCardQuestion.nextCards!==undefined){
-                currentCardQuestion.nextCards[indexNextCardToAdd].clicked++
-            }
-            else{
-                throw new Error("there is no next card to this question to add click");
-
-            }
-
-
-           }else{
-                 
-            throw new Error("Error you need to give id of cardQuestion ");
-
-           }
+        const currentCard:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(idCard)
+        if(currentCard===undefined)
+         throw new Error("Error cant find card (question/final answer) with the id tou give ");
+        else{
+            currentCard.clicked++;
+            return currentCard.clicked;
+            
+        }
 }
 
-const addNewFinalAnswerCardAndConnect:CardModel.addNewFinalAnswerAndAnswerToCardQuestion=(idQuestionCard:CardModel.Card["id"],fa:faModel.FinalAnswerCard,cardQuestionIdRefToFinalAnswer:qcModel.QuestionCard["id"],answerRefToFinalAnswer:string)=>{
+const addNewFinalAnswerCardAndConnect:CardModel.addNewFinalAnswerAndAnswerToCardQuestion=(idQuestionCard:CardModel.Card["id"],fa:faModel.FinalAnswerCard,answerRefToFinalAnswer:string)=>{
+    console.log("here logics");
 
-    const cardQuestion:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(cardQuestionIdRefToFinalAnswer)
+    const cardQuestion:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(idQuestionCard)
     if(cardQuestion?.type==="QuestionCard"){
          cardQuestion.answers.push(answerRefToFinalAnswer)
+         fa.clicked=startClickedForNewCard;
         cardQuestion.nextCards?.push(fa) 
-           
+           return "add the final answer succuess"
 
         }else{
             throw new Error("Error you need to give id of cardQuestion ");
@@ -151,4 +146,4 @@ const addNewQuestionCardAndConnect=()=>{
 
 }
 
-export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers,addNewFinalAnswerCardAndConnect,addNewClickToCard}
+export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers,addNewClickToCard,addNewFinalAnswerCardAndConnect}

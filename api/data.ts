@@ -1,3 +1,7 @@
+//add new final answer json exanapel
+// {"type":"FinalAnswerCard","cardTitle":"העבר פניה למדור תו''ם","ahmashSelected":false,"crmField":"גיוס","crmSubField":"מתגייסים ברשת","crmQuestion":"לא מצליח להתחבר לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר","cardQuestionIdRefToFinalAnswer":3,"answerTextRefToFinalAnswer":"new answer ref to final answerr"}
+
+
 // import {FinalAnswerCard} from './models/finalAnswerModel'
 // import {QuestionCard} from './models/questionCardModel'
 // const c1 :QuestionCard ={id:1,type:"QuestionCard",cardTitle:"היכן הבעיה?",clicked:40,ahmashSelected:false,answers:[ "אתר","לא"]}

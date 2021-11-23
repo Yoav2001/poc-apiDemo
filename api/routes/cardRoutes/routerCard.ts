@@ -7,8 +7,9 @@ import cardQuestionRouter from './questionCardRouter'
 //api/card/qustionCard/answer
 //api/card/qustionCard/
 const router = express.Router();
-router.post('/',controlles.addNewFinalAnswerCard)
+router.post('/addNewFinalCard',controlles.addNewFinalAnswerCard)
 router.get('/firstCard',controlles.getTheFirstCard);
+router.post('/addClick/:cardId',controlles.addNewClickToCard)
 router.get('/inchargeSelected',controlles.getInchargeSelected);
 router.get('/inchargeSelectedCount',controlles.getCountInchargeSelected);
 

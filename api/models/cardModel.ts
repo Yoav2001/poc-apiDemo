@@ -23,9 +23,9 @@ export type Card ={
  export type getMostPopularFinalAnswerOfCardQuestion = (cardQuestionid:Card["id"]) =>(FinalAnswerCard|undefined)[];
  export type getAllInchargeSelectedCards = () =>(QuestionCard|FinalAnswerCard)[];
  export type getAllCardsByType = (type:FinalAnswerCard["type"]|QuestionCard["type"]) =>(QuestionCard|FinalAnswerCard)[];//field named type  in question card and final answers need to be same types string 
- export type addNewFinalAnswerAndAnswerToCardQuestion = (idQuestionCard:QuestionCard["id"],fa:FinalAnswerCard,answerRefToFa:string) =>void;
+ export type addNewFinalAnswerAndAnswerToCardQuestion = (idQuestionCard:QuestionCard["id"],fa:FinalAnswerCard,answerRefToFa:string) =>string;
  export type addNewClickToCardCountWayOne = (idCurrentCardQuestion:Card["id"],indexNextCardSelected:number) =>void;//יקבל מזהה כרטיס ויוסיף לאובייקט במקום האינדקס במערך נקסט לחיצה נוספת
-export type addNewClickToCard = (idCard:Card["id"]) =>void;
+ export type addNewClickToCard = (idCard:Card["id"]) =>Card["clicked"]
 
  
 

@@ -83,18 +83,25 @@ export default  {
         res.json(cardLogic.getAllquestionOrFinalanswers("FinalAnswerCard"));
     },
     addNewClickToCard:(req:express.Request,res:express.Response)=>{
-        const {idCurrentCardQuestion,indexNextCardSelected}:{ idCurrentCardQuestion : number , indexNextCardSelected : string}=req.body;
-
-        cardLogic.addNewClickToCard()
+        const idCardQuestionOrFinal:string = req.params.cardId;
+        
+        const numClicked:number=  cardLogic.addNewClickToCard(parseInt(idCardQuestionOrFinal))
+            res.json(`numClicked is ${numClicked}`)
+        
+      
     },
     addNewFinalAnswerCard:(req:express.Request,res:express.Response)=>{
+        console.log("here contorls");
+        
         const { cardTitle, ahmashSelected ,crmField, crmSubField, crmQuestion,crmSubQuestion} : { cardTitle : string, ahmashSelected : boolean,crmField : string, crmSubField : string, crmQuestion : string,crmSubQuestion:string} = req.body;
-        const idForNewFaCard :number =cardData[cardData.length].id++;
+        const idForNewFaCard :number =(cardData[cardData.length-1].id)+1;
         const c:Card={id:idForNewFaCard,cardTitle:cardTitle,clicked:0,ahmashSelected:ahmashSelected};
         const fa:FinalAnswerCard={...c,type:"FinalAnswerCard",crmField:crmField,crmSubField:crmSubField, crmQuestion :crmQuestion, crmSubQuestion:crmSubQuestion}
-        const {cardQuestionIdRefToFinalAnswer,answerRefToFinalAnswer}:{ cardQuestionIdRefToFinalAnswer : number , answerRefToFinalAnswer : string}=req.body;
+        console.log(cardData[cardData.length-1].id);
+        
+        const {cardQuestionIdRefToFinalAnswer,answerTextRefToFinalAnswer}:{ cardQuestionIdRefToFinalAnswer : number , answerTextRefToFinalAnswer : string}=req.body;
         try{
-             cardLogic.addNewFinalAnswerCardAndConnect(fa,cardQuestionIdRefToFinalAnswer,answerRefToFinalAnswer);
+             cardLogic.addNewFinalAnswerCardAndConnect(cardQuestionIdRefToFinalAnswer,fa,answerTextRefToFinalAnswer);
 
         }
         catch{
