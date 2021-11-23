@@ -15,8 +15,7 @@ router.get('/inchargeSelectedCount',controlles.getCountInchargeSelected);
 router.get('/:cardId',controlles.getCardByCardId );//this req need to be the last req because of paramas
 //get a card id and return all final answers 
 router.get('/mostClicked/:cardId',controlles.getMostPopularFinalAnswer);
-router.patch('/updateCard',controlles.updateCard)
-router.patch('/updateCard')
+// router.patch('/updateCard',controlles.updateCard)
 
 router.use("/finalAnswer",finalAnswerRouter)
 router.use("/cardQuestion",cardQuestionRouter)

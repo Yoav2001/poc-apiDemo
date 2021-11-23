@@ -111,11 +111,17 @@ export default  {
             
       },
       updateFinalAnswer:(req:express.Request,res:express.Response)=>{
-        const updateCard:FinalAnswerCard=req.body.updateFinalAnswer
+          console.log(req.body);
+          
+        const updateCard:FinalAnswerCard=req.body.updateFinalAnswer as FinalAnswerCard
+        console.log(req.body.updateFinalAnswer);
+        
+        console.log(updateCard);
+        
         cardLogic.updateFinalAnswerOrQuestionCard(updateCard)
     },
     updateCardQuestion:(req:express.Request,res:express.Response)=>{
-        const updateCard:QuestionCard=req.body.updateFinalAnswer
+        const updateCard:QuestionCard=req.body.updateCardQuestion as QuestionCard
         cardLogic.updateFinalAnswerOrQuestionCard(updateCard)
     }
       

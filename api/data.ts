@@ -1,5 +1,27 @@
 //add new final answer json exanapel
 // {"type":"FinalAnswerCard","cardTitle":"העבר פניה למדור תו''ם","ahmashSelected":false,"crmField":"גיוס","crmSubField":"מתגייסים ברשת","crmQuestion":"לא מצליח להתחבר לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר","cardQuestionIdRefToFinalAnswer":3,"answerTextRefToFinalAnswer":"new answer ref to final answerr"}
+//        {"type":"FinalAnswerCard","cardTitle":"pa ","ahmashSelected":false,"crmField":"איתי ליאור","crmSubField":"מתגייסים ברשת","crmQuestion":"לא מצליח adssadas לאתר","crmSubQuestion":"לא מצליח להתחבר לאתר","cardQuestionIdRefToFinalAnswer":1,"answerTextRefToFinalAnswer":"תשובה חדשדה"}
+
+
+//update data json ex'
+// {
+
+//     "updateFinalAnswer":
+//             {
+//                   "id": 10,
+//                     "type": "FinalAnswerCard",
+//                     "cardTitle": "לעשות הסבה, להנחות להמתין לפחות 24 שעות ולהיכנס עם סיסמא ראשונית(סוג מידע 105)",
+//                     "clicked": 600,
+//                     "ahmashSelected": false,
+//                     "crmField": "גיוס",
+//                     "crmSubField": "ר'קרק'ר ברשת",
+//                     "crmQuestion": "נוסיקג",
+//                     "crmSubQuestion": "גגגגגגגגגגגגגגגגגגגגגגגגג"
+//             }
+    
+//     }
+
+
 
 
 // import {FinalAnswerCard} from './models/finalAnswerModel'

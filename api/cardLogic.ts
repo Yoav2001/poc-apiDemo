@@ -189,7 +189,9 @@ const updateQuestionCard:qcModel.updateQuestionCard =(currentCard: qcModel.Quest
 
     currentCard.ahmashSelected=updateQuestionCard.ahmashSelected;
     currentCard.cardTitle=updateQuestionCard.cardTitle;
-    currentCard.answers.map((answer ,index)=>answer===updateQuestionCard.answers[index])
+    
+    currentCard.answers=updateQuestionCard.answers;
+    // currentCard.answers.map((answer ,index)=>answer===updateQuestionCard.answers[index])
 
 }
 export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers,addNewClickToCard,addNewFinalAnswerCardAndConnect,updateFinalAnswerOrQuestionCard}
