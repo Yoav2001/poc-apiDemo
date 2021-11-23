@@ -146,4 +146,50 @@ const addNewQuestionCardAndConnect=()=>{
 
 }
 
-export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers,addNewClickToCard,addNewFinalAnswerCardAndConnect}
+
+const updateFinalAnswerOrQuestionCard:CardModel.udpateFinalOrQuestionCard=(updateCard:faModel.FinalAnswerCard|qcModel.QuestionCard)=>{
+    const currentCard:qcModel.QuestionCard|faModel.FinalAnswerCard|undefined=getCardByCardId(updateCard.id)
+    if(currentCard===undefined){
+        throw new Error("Error cant find card (question/final answer) with the id tou give ");
+
+    }
+
+    if(currentCard.type!==updateCard.type)
+        throw new Error("you give a card with diffrent type to update ");
+
+    switch(currentCard.type){
+
+        case "QuestionCard":
+            updateQuestionCard(currentCard,updateCard as qcModel.QuestionCard)
+            break;
+
+        case "FinalAnswerCard":
+            updateFinalAnswer(currentCard,updateCard as faModel.FinalAnswerCard)
+
+        break;
+        default:
+            throw new Error("there was problem with update ");
+            
+    }
+
+    
+
+}
+const updateFinalAnswer:faModel.updateFinalAnswer =(currentCard:faModel.FinalAnswerCard,updateFaCard:faModel.FinalAnswerCard)=>{
+    currentCard.ahmashSelected=updateFaCard.ahmashSelected;
+    currentCard.cardTitle=updateFaCard.cardTitle;
+    currentCard.crmField=updateFaCard.crmField;
+    currentCard.crmSubField=updateFaCard.crmSubField;
+    currentCard.crmQuestion=updateFaCard.crmQuestion;
+    currentCard.crmSubQuestion=updateFaCard.crmSubQuestion;
+
+}
+
+const updateQuestionCard:qcModel.updateQuestionCard =(currentCard: qcModel.QuestionCard, updateQuestionCard: qcModel.QuestionCard)=>{
+
+    currentCard.ahmashSelected=updateQuestionCard.ahmashSelected;
+    currentCard.cardTitle=updateQuestionCard.cardTitle;
+    currentCard.answers.map((answer ,index)=>answer===updateQuestionCard.answers[index])
+
+}
+export default {getFirstCard,getCardByCardId,updateCard,getInchargeSelectedCards,getPopularFinalAnswers,getAllFinalAnswersOfCard,getAllquestionOrFinalanswers,addNewClickToCard,addNewFinalAnswerCardAndConnect,updateFinalAnswerOrQuestionCard}

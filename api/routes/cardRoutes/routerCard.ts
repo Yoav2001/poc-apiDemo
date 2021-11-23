@@ -7,7 +7,6 @@ import cardQuestionRouter from './questionCardRouter'
 //api/card/qustionCard/answer
 //api/card/qustionCard/
 const router = express.Router();
-router.post('/addNewFinalCard',controlles.addNewFinalAnswerCard)
 router.get('/firstCard',controlles.getTheFirstCard);
 router.post('/addClick/:cardId',controlles.addNewClickToCard)
 router.get('/inchargeSelected',controlles.getInchargeSelected);
@@ -17,7 +16,7 @@ router.get('/:cardId',controlles.getCardByCardId );//this req need to be the las
 //get a card id and return all final answers 
 router.get('/mostClicked/:cardId',controlles.getMostPopularFinalAnswer);
 router.patch('/updateCard',controlles.updateCard)
-
+router.patch('/updateCard')
 
 router.use("/finalAnswer",finalAnswerRouter)
 router.use("/cardQuestion",cardQuestionRouter)

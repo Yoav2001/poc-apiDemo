@@ -7,6 +7,8 @@ const router = express.Router();
 // so i go /all
 router.get('/all',controlles.getAllFinalAnswers);
 router.get('/:cardId',controlles.getallFinalAnswersOfCardQuestion);
+router.post('/addNewFinalCard',controlles.addNewFinalAnswerCard)
+router.patch('/update',controlles.updateFinalAnswer);
 
 export default router;
 

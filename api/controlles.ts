@@ -109,8 +109,16 @@ export default  {
 
         }
             
-      }
-
+      },
+      updateFinalAnswer:(req:express.Request,res:express.Response)=>{
+        const updateCard:FinalAnswerCard=req.body.updateFinalAnswer
+        cardLogic.updateFinalAnswerOrQuestionCard(updateCard)
+    },
+    updateCardQuestion:(req:express.Request,res:express.Response)=>{
+        const updateCard:QuestionCard=req.body.updateFinalAnswer
+        cardLogic.updateFinalAnswerOrQuestionCard(updateCard)
+    }
+      
     
     // addNewCard:(req:express.Request,res:express.Response)=>{
        

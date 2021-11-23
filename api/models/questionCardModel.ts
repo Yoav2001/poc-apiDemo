@@ -9,6 +9,7 @@ export type QuestionCard =  Card &{
  }
  export type getQuestionCardByCardId = (questionCardId:QuestionCard["id"]) => QuestionCard | undefined;
  export type getAllQuestionCard = () => QuestionCard[] | undefined;
+ export type updateQuestionCard = (currentCard:QuestionCard,updateQestionCard:QuestionCard) => void;
 
 
  //answer table

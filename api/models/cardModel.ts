@@ -19,6 +19,8 @@ export type Card ={
  export type getCardByCardId = (cardId:Card["id"]) => QuestionCard|FinalAnswerCard|undefined;
  export type addCard = (c: QuestionCard|FinalAnswerCard) => QuestionCard|FinalAnswerCard;
  export type updateCard = (c: Card) =>  QuestionCard|FinalAnswerCard|undefined;
+ export type udpateFinalOrQuestionCard = (c: QuestionCard|FinalAnswerCard) => void
+
  export type getallFinalAnswerofCardQuestion = (cardQuestionid:Card["id"]) =>(FinalAnswerCard|undefined)[];
  export type getMostPopularFinalAnswerOfCardQuestion = (cardQuestionid:Card["id"]) =>(FinalAnswerCard|undefined)[];
  export type getAllInchargeSelectedCards = () =>(QuestionCard|FinalAnswerCard)[];
